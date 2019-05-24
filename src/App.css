@@ -1,0 +1,11 @@
+.container{
+    width : 80%;
+    overflow: hidden;
+    margin: auto;
+}
+input{
+    height: 30px;
+    width: 35%;
+
+}
+
