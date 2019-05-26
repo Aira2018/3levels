@@ -2,48 +2,25 @@ import React from 'react';
 import {NavLink} from 'react-router-dom'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
-import {robots} from '../../robots'
-import {Redirect} from 'react-router-dom'
+
 
 
 class About extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            robots : robots,
-            redirecthome : false,
-            
-                title : '',
-                desc : '',
+            robots : [],
         }
+    }
+    componentWillMount(){
+        this.setState({robots : this.props.robots})
     }
     
     deleteRow = (id) => {
-        
         var afterdel = this.state.robots.filter(robot => robot.id !== id)
         this.setState({robots : afterdel})
+        this.props.loadRobots(this.state.robots);
     }
-    onChangeTitle =(event)=>{
-        this.setState({
-            title : event.target.value
-        })
-    }
-    onChangeDesc =(event)=>{
-        this.setState({
-            desc : event.target.value
-        })
-    }
-    submitPost =()=>{
-        this.props.loadPost(this.state.title, this.state.desc)
-         this.setState({redirecthome : true})
-         
-    }
-    redirectHome = () => {
-        if(this.state.redirecthome){
-            return <Redirect to='/'/>
-        }
-    }
-    
     
     render(){
 
@@ -93,6 +70,7 @@ class About extends React.Component{
                     return(
                         <div>
                             <button
+                            className='button-delete'
                             onClick={()=>this.deleteRow(props.original.id)}
                             >Detete</button>
                         </div>
@@ -104,7 +82,7 @@ class About extends React.Component{
         ]
         return (
             <div className='container'>
-                {this.redirectHome()}
+                
                 <div>
                     <h2><NavLink to='/'>Aira2018</NavLink></h2>
                     <h4>Aira2018/Mangers</h4>

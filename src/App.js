@@ -13,44 +13,36 @@ import {robots} from '../src/robots'
 class App extends React.Component {
   state = {
     inhome : true,
-    robots : [],
+    robots : robots,
+   
     post : {
-      title : '',
-      desc : ''
+      username : '',
+      post : ''
     },
     posts : [
-      {username : 'raj', post : 'get the things done by tomorrow' },
-      {username : 'avyas', post :'travelling is the best feeling'},
-      {username : 'suman', post : 'time to finsh th job'},
+      {username : '#raj', post : 'get the things done by tomorrow, make a peace wherever you go.' },
+      {username  :'avyas', post : 'dare to go away'}
   ],  
   }
-  componentDidMount = () =>{
+  loadRobots = (robots) => {
     this.setState({robots : robots})
-  }
-  loadPost = (title, desc) =>{
-    
-    console.log('post in a app ',title, desc)
-    this.setState({post : {
-      title : title,
-      desc: desc,
-    }})
   }
   
   render(){
     
     return (
       <div>
+       
         <Router>
           <h3 className='container'>goodbye to the dogma!!</h3>
           < Navigation inhome={this.state.inhome}/>
           <Switch>
-            
             <Route path='/signin'exact component={signInForm}/>
             <Route path='/signup'exact component={signUpForm}/>
             <Route path='/about'exact 
-            render={(props) => <About {...props} loadPost={this.loadPost}/>}/>
+            render={(props) => <About {...props} robots={this.state.robots} loadRobots={this.loadRobots}/>}/>
             <Route path='/' exact
-            render = {(props)=> <Home {...props} post = {this.state.post} posts={this.state.posts}/>} />
+            render = {(props)=> <Home {...props} robots={this.state.robots}/>} />
           </Switch>
         </Router>
         

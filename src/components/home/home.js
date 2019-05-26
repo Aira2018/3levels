@@ -4,20 +4,23 @@ import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
 //importing components
-import { robots } from '..//../robots'
+
 
 
 class Home extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            name : 'raj',
-            robots : robots, 
+            robots : [],
         }
     }
+    componentWillMount(){
+        this.setState({robots : this.props.robots})
+    }
+   
     render(){
-      const {posts} = this.props;
-      console.log('posts in home', posts)
+      
+   
         const columns = [
             {
                 Header : 'Id',
@@ -66,19 +69,8 @@ class Home extends React.Component{
                         go with the flow, here with Aira.
                     </p>
                 </div>
+
                 <div style={{display :'flex'}}>
-                    {
-                        posts.map((user, ind)=> {
-                            return(
-                                <div style ={{border : '1px solid', width : '40%', margin : '5px', padding: '5px', textAlign :'center', }}>
-                                    <h5>Recents</h5>
-                                    <h6>{user.username}</h6>
-                                    <p>{user.post}</p>
-                                </div>
-                            )
-                        })
-                       
-                    }
                     
                 </div>
                 <div>
