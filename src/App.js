@@ -16,16 +16,22 @@ class App extends React.Component {
     robots : robots,
    
     post : {
-      username : '',
-      post : ''
+      title : '',
+      description : '',
     },
     posts : [
-      {username : '#raj', post : 'get the things done by tomorrow, make a peace wherever you go.' },
-      {username  :'avyas', post : 'dare to go away'}
+      {title : '#raj', description : 'get the things done by tomorrow, make a peace wherever you go.' },
+      {title  :'avyas', description : 'dare to go away'}
   ],  
   }
   loadRobots = (robots) => {
     this.setState({robots : robots})
+  }
+  loadPost = (title, description) =>{
+    this.setState({post : {
+      title : title,
+      description : description,
+    }})
   }
   
   render(){
@@ -40,9 +46,9 @@ class App extends React.Component {
             <Route path='/signin'exact component={signInForm}/>
             <Route path='/signup'exact component={signUpForm}/>
             <Route path='/about'exact 
-            render={(props) => <About {...props} robots={this.state.robots} loadRobots={this.loadRobots}/>}/>
+            render={(props) => <About {...props} robots={this.state.robots} loadRobots={this.loadRobots} loadPost={this.loadPost}/>}/>
             <Route path='/' exact
-            render = {(props)=> <Home {...props} robots={this.state.robots}/>} />
+            render = {(props)=> <Home {...props} robots={this.state.robots} state = {this.state}/>}/>
           </Switch>
         </Router>
         

@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
@@ -10,11 +10,37 @@ class About extends React.Component{
         super(props);
         this.state = {
             robots : [],
+                title : '',
+                description : '',
+                redirecthome :false,
+           
         }
     }
     componentWillMount(){
         this.setState({robots : this.props.robots})
     }
+    
+    onChangeTitle = (event) => {
+        this.setState({
+            title : event.target.value
+        })
+    }
+    onChangeDesc = (event) => {
+        this.setState({
+            description : event.target.value
+        })
+    }
+    submitPost = () => {
+        this.props.loadPost(this.state.title, this.state.description);
+        this.setState({redirecthome  : true});
+
+    }
+    redirectHome = () => {
+        if(this.state.redirecthome){
+            return <Redirect to='/' />
+        }
+    }
+
     
     deleteRow = (id) => {
         var afterdel = this.state.robots.filter(robot => robot.id !== id)
@@ -82,6 +108,7 @@ class About extends React.Component{
         ]
         return (
             <div className='container'>
+                {this.redirectHome()}
                 
                 <div>
                     <h2><NavLink to='/'>Aira2018</NavLink></h2>

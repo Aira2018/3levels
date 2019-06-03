@@ -5,8 +5,6 @@ import 'react-table/react-table.css'
 
 //importing components
 
-
-
 class Home extends React.Component{
     constructor(props){
         super(props);
@@ -19,8 +17,17 @@ class Home extends React.Component{
     }
    
     render(){
-      
-   
+        const {post, posts} =  this.props.state;
+        const count = (posts.length);
+        console.log(posts[count-1])
+        
+        if(post.title !== '' && post.title !== posts[count-1].title ){
+            posts.push(post);
+            console.log('posts after inserting', posts);
+        }
+        console.log('posts without inserting', posts);
+        
+    
         const columns = [
             {
                 Header : 'Id',
@@ -70,7 +77,19 @@ class Home extends React.Component{
                     </p>
                 </div>
 
-                <div style={{display :'flex'}}>
+                <div>
+                  {
+                      posts.map((post) => {
+                        return(
+                            <div style={{border : '2px solid', margin : '5px', padding : '5px',width : '20%', height : '200px'}}>
+                                 <h3>Recents posts</h3>
+                                 <h4>{post.title}</h4>
+                                 <p>{post.description}</p>
+                            </div>
+                        )
+                      } 
+                    )
+                  }
                     
                 </div>
                 <div>
