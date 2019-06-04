@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink, Redirect} from 'react-router-dom'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
+import Export from '../export/export'
 
 
 
@@ -13,7 +14,6 @@ class About extends React.Component{
                 title : '',
                 description : '',
                 redirecthome :false,
-           
         }
     }
     componentWillMount(){
@@ -116,16 +116,28 @@ class About extends React.Component{
                     <h5>get the most most supreme intellect goals</h5>
                     <p></p> 
                 </div>
-                <div>
+                <div className="react-table">
                     {
                         <ReactTable 
                         columns={columns}
                         data = {this.state.robots }
                         defaultPageSize={10}>
+                            {(state, table1) => {
+                                this.reactTable = state.pageRows.map((user) => user._original);
+                                return (
+                                    <div>
+                                        {table1()}
+                                        <Export users = {this.state.robots}/>
+                                    </div>
+                                )
+                            }
+                        }
+                            
                         </ReactTable>
                     }
     
                 </div>
+                
                 <div className='post-manager'>
                     <h4>Create a post here!!</h4>
                     <div>

@@ -20,8 +20,8 @@ class App extends React.Component {
       description : '',
     },
     posts : [
-      {title : '#raj', description : 'get the things done by tomorrow, make a peace wherever you go.' },
-      {title  :'avyas', description : 'dare to go away'}
+      {title : '#raj', description : 'get the things done by tomorrow, make a peace wherever you go otherwise you might face the tremendous uncertainty' },
+      {title  :'avyas', description : 'dare to go away, even you feel it is the natural capricious behaviour, sophisticated and cosmopolitician society '}
   ],  
   }
   loadRobots = (robots) => {
